@@ -11,10 +11,13 @@ command_timeout = 500  # keep the prompt snappy in big repos
 
 # Line 1: location + git + toolchain + timing. Line 2: the prompt character.
 format = """
+$username$hostname\
 $directory\
+${custom.worktree}\
 $git_branch\
 $git_state\
 $git_status\
+$git_metrics\
 $nodejs\
 $python\
 $rust\
@@ -81,6 +84,18 @@ staged = "+${count}"
 renamed = "»${count}"
 deleted = "✘${count}"
 
+[git_metrics]
+disabled = false
+added_style = "green"
+deleted_style = "red"
+format = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
+
+[custom.worktree]
+when = '[ "$(git rev-parse --git-dir 2>/dev/null)" != "$(git rev-parse --git-common-dir 2>/dev/null)" ]'
+shell = ["sh"]
+style = "cyan"
+format = "[wt]($style) "
+
 # ── Toolchains (only shown inside matching projects) ─────
 [nodejs]
 symbol = "node "
@@ -115,6 +130,8 @@ format = "[$symbol($version)]($style) "
 # ── Timing & jobs ────────────────────────────────────────
 [cmd_duration]
 min_time = 2_000
+show_notifications = true
+min_time_to_notify = 45_000
 style = "base1"
 format = "[took $duration]($style) "
 
@@ -148,3 +165,12 @@ disabled = true
 [docker_context]
 disabled = true
 
+[username]
+show_always = false
+style_user = "base01"
+format = "[$user]($style)@"
+
+[hostname]
+ssh_only = true
+style = "bold orange"
+format = "[$hostname]($style) "
