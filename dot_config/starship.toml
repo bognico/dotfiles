@@ -32,7 +32,7 @@ $character"""
 
 right_format = ""
 
-[palettes.solarized_light]
+[palettes.solarized_dark]
 base03  = "#002b36"
 base02  = "#073642"
 base01  = "#586e75"   # emphasized content
@@ -49,6 +49,24 @@ violet  = "#6c71c4"
 blue    = "#268bd2"
 cyan    = "#2aa198"
 green   = "#859900"
+
+[palettes.solarized_light]
+base03  = '#fdf6e3' # Fundal principal
+base02  = '#eee8d5' # Fundal secundar / evidențieri
+base01  = '#93a1a1' # Text secundar / comentarii
+base00  = '#839496' # Text
+base0   = '#657b83' # Text principal (întunecat)
+base1   = '#586e75' # Text accentuat
+base2   = '#073642'
+base3   = '#002b36'
+yellow  = '#b58900'
+orange  = '#cb4b16'
+red     = '#dc322f'
+magenta = '#d33682'
+violet  = '#6c71c4'
+blue    = '#268bd2'
+cyan    = '#2aa198'
+green   = '#859900'
 
 # ── Location ─────────────────────────────────────────────
 [directory]
