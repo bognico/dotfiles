@@ -1,0 +1,33 @@
+# History
+HISTFILE=~/.zsh_history HISTSIZE=50000 SAVEHIST=50000
+setopt share_history hist_ignore_all_dups hist_ignore_space hist_reduce_blanks
+
+# Navigation
+setopt auto_cd auto_pushd pushd_ignore_dups
+
+# Completion
+BREW_PREFIX="$(brew --prefix)"
+FPATH="$BREW_PREFIX/share/zsh/site-functions:$BREW_PREFIX/share/zsh-completions:$FPATH"
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Keys: emacs mode, up/down search history by prefix
+bindkey -e
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+# Aliases
+alias ls='eza --group-directories-first' ll='eza -l --git' la='eza -la --git'
+alias ..='cd ..' ...='cd ../..'
+alias gs='git status' gd='git diff' gco='git checkout' gl='git log --oneline --graph'
+
+# Tools
+source <(fzf --zsh)              # Ctrl-R history, Ctrl-T files, Alt-C cd
+eval "$(zoxide init zsh)"        # z <partial-dir>
+eval "$(starship init zsh)"
+
+# These must come last
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
